@@ -25,7 +25,7 @@ export const getHadithByNumber = async (req, res) => {
     const hadith = await axios.get(baseUrl);
     res.json(hadith);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    next(new ErrorHandler(500, error.message));
   }
 };
 

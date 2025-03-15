@@ -5,7 +5,7 @@ import userRouter from "./routes/user.js"
 import { connectToDatabase } from "./db/database.js"
 import { apiKeyMiddleware } from "./middleware/apiKey.js"
 import cookieParser from "cookie-parser"
-import { errorMiddleware } from "./middleware/error.js"
+import ErrorHandler, { errorMiddleware } from "./middleware/error.js"
 import cors from "cors"
 
 // Load environment variables
@@ -48,6 +48,7 @@ const startServer = async () => {
 
   } catch (error) {
     console.error("Failed to start server:", error)
+    ErrorHandler(500, error.message)
     // Implement appropriate error handling here
     // You might want to retry the connection or exit the process
     process.exit(1)
