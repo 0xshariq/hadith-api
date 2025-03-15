@@ -1,5 +1,5 @@
 import axios from "axios"
-import ErrorHandler from "../middlewares/error.js"
+import ErrorHandler from "../middleware/error.js"
 
 const API_BASE_URL = "https://user-authentication-api-jqfm.onrender.com/api/v2/users"
 

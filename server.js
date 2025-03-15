@@ -3,9 +3,9 @@ import dotenv from "dotenv"
 import hadithRouter from "./routes/hadith.js"
 import userRouter from "./routes/user.js"
 import { connectToDatabase } from "./db/database.js"
-import { apiKeyMiddleware } from "./middlewares/apiKey.js"
+import { apiKeyMiddleware } from "./middleware/apiKey.js"
 import cookieParser from "cookie-parser"
-import { errorMiddleware } from "./middlewares/error.js"
+import { errorMiddleware } from "./middleware/error.js"
 import cors from "cors"
 
 // Load environment variables
@@ -28,8 +28,8 @@ app.use(
 app.use(errorMiddleware)
 
 // Routes
-app.use("/api/v2/users", userRouter)
-app.use("/api/v2/quran", apiKeyMiddleware, hadithRouter)
+app.use("/api/v1/users", userRouter)
+app.use("/api/v1/hadith", apiKeyMiddleware, hadithRouter)
 
 // Root route
 app.get("/", (req, res) => {
