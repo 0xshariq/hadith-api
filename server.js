@@ -33,7 +33,7 @@ app.use("/api/v1/hadith", apiKeyMiddleware, hadithRouter)
 
 // Root route
 app.get("/", (req, res) => {
-  res.send("Welcome to the Quran API");
+  res.send("Welcome to the Hadith API");
 });
 
 // Connect to database and start server
