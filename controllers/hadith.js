@@ -1,4 +1,5 @@
 import axios from "axios";
+import ErrorHandler from "../middleware/error.js";
 
 export const getHadithByNumber = async (req, res) => {
   try {
@@ -36,7 +37,7 @@ export const getAllEditions = async (req, res) => {
         const editions = await axios.get(baseUrl);
         res.json(editions);
     } catch (error) {
-        next(new ErrorHandler(500, error.message));
+        new ErrorHandler(500, error.message);
     }
 }
 
@@ -64,7 +65,7 @@ export const getSections = async (req, res) => {
         const sections = await axios.get(baseUrl);
         res.json(sections);
     } catch (error) {
-        next(new ErrorHandler(500, error.message));
+        new ErrorHandler(500, error.message);
     }
 }
 export const getInfo = async (req, res) => {
@@ -73,6 +74,6 @@ export const getInfo = async (req, res) => {
         const info = await axios.get(baseUrl);
         res.json(info);
     } catch (error) {
-        next(new ErrorHandler(500, error.message));
+        new ErrorHandler(500, error.message);
     }
 }
