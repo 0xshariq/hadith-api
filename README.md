@@ -93,7 +93,7 @@ All controllers use a centralized error handler to handle errors consistently. E
   "error": "Error message",
   "stack": "Error stack trace (only in development mode)"
 }
-
+```
 ## Common Error Responses
  - 400 Bad Request: Returned when the request parameters or body are invalid.
  - 401 Unauthorized: Returned when authentication fails or the user is not logged in.
