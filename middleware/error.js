@@ -1,16 +1,18 @@
 class ErrorHandler extends Error {
     constructor(statusCode, message) {
-        super(message);
-        this.statusCode = statusCode;
+      super(message);
+      this.statusCode = statusCode;
     }
-}
-export const errorMiddleware = (error, req, res, next) => {
-    error.message = error.message || 'An unexpected error occurred. Please try again.';
-    error.statusCode = error.statusCode || 500;
-    console.error('Error Middleware:', error.message);
-    return res.status(error.statusCode).json({
-        success: false,
-        message: error.message,
+  }
+  
+  // Error Middleware
+  export const errorMiddleware = (error, req, res, next) => {
+    console.error("Error Middleware:", error.message);
+  
+    res.status(error.statusCode || 500).json({
+      success: false,
+      message: error.message || "An unexpected error occurred. Please try again.",
     });
-};
-export default ErrorHandler;
+  };
+  
+  export default ErrorHandler;
