@@ -9,6 +9,7 @@ import compression from "compression";
 import cors from "cors";
 import morgan from "morgan";
 import { apiKeyMiddleware } from "./middleware/apiKey.js";
+import { connectToDatabase } from "./db/database.js";
 
 // Load environment variables
 dotenv.config({ path: "./config.env" });
