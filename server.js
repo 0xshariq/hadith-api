@@ -52,14 +52,34 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Hadith API");
 });
 
-// Start Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Connect to database and start server
+const startServer = async () => {
+  try {
+    await connectToDatabase()
 
-// Graceful Shutdown
-process.on("SIGINT", () => {
-  console.log("Shutting down gracefully...");
-  process.exit(0);
-});
+    const PORT = process.env.PORT || 3000
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`)
+    })
+
+  } catch (error) {
+    console.error("Failed to start server:", error)
+    // Implement appropriate error handling here
+    // You might want to retry the connection or exit the process
+    process.exit(1)
+  }
+}
+
+startServer()
+
+// Handle graceful shutdown
+process.on("SIGINT", async () => {
+  try {
+    console.log("Shutting down gracefully...")
+    process.exit(0)
+  } catch (error) {
+    console.error("Error during shutdown:", error)
+    process.exit(1)
+  }
+})
+
