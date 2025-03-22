@@ -1,12 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
 import hadithRouter from "./routes/hadith.js";
+import userRouter from "./routes/user.js"
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import compression from "compression";
 import cors from "cors";
 import morgan from "morgan";
+import { apiKeyMiddleware } from "./middleware/apiKey.js";
 
 // Load environment variables
 dotenv.config({ path: "./config.env" });
@@ -42,7 +44,8 @@ app.use(
 );
 
 // Routes
-app.use("/api/v1/hadith", hadithRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/hadith",apiKeyMiddleware, hadithRouter);
 
 // Root route
 app.get("/", (req, res) => {
